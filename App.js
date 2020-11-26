@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, TouchableOpacity, View, Image, StyleSheet} from 'react-native';
 
 import DiceOne from './assets/dice1.png';
@@ -9,12 +9,38 @@ import DiceFive from './assets/dice5.png';
 import DiceSix from './assets/dice6.png';
 
 const App = () => {
-  const uri = DiceFive;
+  const [uri, setUri] = useState(DiceOne);
+
+  const handleButton = () => {
+    let random = Math.ceil(Math.random() * 6);
+    switch (random) {
+      case 1:
+        setUri(DiceOne);
+        break;
+      case 2:
+        setUri(DiceTwo);
+        break;
+      case 3:
+        setUri(DiceThree);
+        break;
+      case 4:
+        setUri(DiceFour);
+        break;
+      case 5:
+        setUri(DiceFive);
+        break;
+      case 6:
+        setUri(DiceSix);
+        break;
+      default:
+        setUri(DiceOne);
+    }
+  };
   return (
     <>
       <View style={styles.container}>
         <Image style={styles.image} source={uri} />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleButton}>
           <Text style={styles.gamePlayButton}>DiceRoller</Text>
         </TouchableOpacity>
       </View>
